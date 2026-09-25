@@ -116,6 +116,7 @@ img {
 	}
 	.info .texts {
 		margin-left: 40px;
+		max-width: 720px;
 	}
 	.info .small_text {
 		margin-top: 20px;
