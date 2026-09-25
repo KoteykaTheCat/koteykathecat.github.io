@@ -1,0 +1,140 @@
+:root {
+	--main_c: #004D3E;
+	--main_hc: #00B693;
+	--gray_c: #1C1E21;
+	--header_h: 50px;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: Arimo;
+	font-size: 20px;
+	transition: 0.25s;
+	color: white;
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none
+}
+
+img {
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+::selection {
+	background: var(--main_hc);
+	color: black;
+}
+
+.body {
+	background: black;
+}
+
+.page {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	overflow: hidden;
+	background: url(img/bg.png);
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+}
+
+
+.header {
+	position: fixed;
+	width: calc(100% - 60px);
+	height: var(--header_h);;
+	display: flex;
+	align-items: center;
+	padding: 15px 30px;
+	background: linear-gradient(135deg, var(--main_c), transparent);
+	box-shadow: rgb(0, 0, 0, 0.4) 0px 0px 25px;
+	z-index: 10;
+}
+	.header .logo {
+		display: flex;
+		align-items: center;
+	}
+		.header .logo .icon {
+			height: 50px;
+		}
+		.header .logo .text {
+			margin-left: 10px;
+			font-family: Jost;
+			max-width: 130px;
+			line-height: 22px;
+		}
+
+	.header .link, .burger_menu .link {
+		margin-left: 30px;
+		padding: 10px 20px;
+		border-radius: 15px;
+		background-color: #1C1E21;
+		overflow: hidden;
+	}
+		.header .link:hover, .burger_menu .link:hover {
+			background-color: #141619;
+		}
+	.header .burger_icon {
+		height: 30px;
+	}
+		.header .burger_icon:hover {
+			cursor: pointer;
+		}
+
+.main {
+	margin-top: var(--header_h);
+	padding: 0 100px;
+}
+
+.mb {
+	display: none;
+}
+
+
+.title {
+	font-family: Jost;
+	font-size: 60px;
+	line-height: 60px;
+}
+
+.info {
+	height: calc(100vh - var(--header_h));
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+	.info .avatar {
+	    border-radius: 50px;
+	    height: 40%;
+	}
+	.info .texts {
+		margin-left: 40px;
+	}
+	.info .small_text {
+		margin-top: 20px;
+	}
+
+.footer {
+	background: black;
+	padding: 30px;
+	display: flex;
+	justify-content: center;
+}
+	.footer .group {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}
+
+
+
+@media (max-width: 720px) {
+
+}
