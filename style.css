@@ -1,7 +1,8 @@
 :root {
 	--main_c: #004D3E;
 	--main_hc: #00B693;
-	--gray_c: #1C1E21;
+	--link_c: #1C1E21;
+	--link_hc: #141619;
 	--header_h: 50px;
 }
 
@@ -52,6 +53,7 @@ img {
 	height: var(--header_h);;
 	display: flex;
 	align-items: center;
+	gap: 30px;
 	padding: 15px 30px;
 	background: linear-gradient(135deg, var(--main_c), transparent);
 	box-shadow: rgb(0, 0, 0, 0.4) 0px 0px 25px;
@@ -71,23 +73,6 @@ img {
 			line-height: 22px;
 		}
 
-	.header .link, .burger_menu .link {
-		margin-left: 30px;
-		padding: 10px 20px;
-		border-radius: 15px;
-		background-color: #1C1E21;
-		overflow: hidden;
-	}
-		.header .link:hover, .burger_menu .link:hover {
-			background-color: #141619;
-		}
-	.header .burger_icon {
-		height: 30px;
-	}
-		.header .burger_icon:hover {
-			cursor: pointer;
-		}
-
 .main {
 	margin-top: var(--header_h);
 	padding: 0 100px;
@@ -100,8 +85,12 @@ img {
 
 .title {
 	font-family: Jost;
+	font-style: italic;
 	font-size: 60px;
 	line-height: 60px;
+}
+.small_text {
+	margin: 20px 0 0 40px;
 }
 
 .info {
@@ -112,21 +101,82 @@ img {
 }
 	.info .avatar {
 	    border-radius: 50px;
-	    height: 40%;
+	    height: 350px;
 	}
 	.info .texts {
 		margin-left: 40px;
 		max-width: 720px;
 	}
-	.info .small_text {
+
+.projects {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.project {
+	display: flex;
+	margin: 30px;
+	gap: 20px;
+	background: rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	border-radius: 50px;
+	max-width: calc(40% - 30px)
+}
+	.project .icon {
+		border-radius: 30px;
+		height: 120px;
+	}
+	.project .title {
+		font-size: 25px;
+	}
+	.project .desc {
+		font-size: 15px;
+	}
+	.project .links {
+		display: flex;
+		flex-wrap: wrap;
 		margin-top: 20px;
+		gap: 10px;
 	}
 
+
+.link {
+	padding: 10px 15px;
+	border-radius: 15px;
+	background-color: var(--link_c);
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+	.link .icon {
+		border-radius: 0;
+		height: 18px;
+	}
+	.link:hover {
+		background-color: var(--link_hc);
+	}
+.link.cf {
+	background-color: #eb622b;
+}
+	.link.cf:hover {
+		background-color: #B74D22;
+	}
+.link.mr {
+	background-color: #1BD96A;
+}
+	.link.mr:hover {
+		background-color: #15A54F;
+	}
+
+
 .footer {
-	background: black;
+	background: linear-gradient(45deg, transparent, var(--main_c));
 	padding: 30px;
 	display: flex;
 	justify-content: center;
+	box-shadow: rgb(0, 0, 0, 0.4) 0px 0px 25px;
 }
 	.footer .group {
 		display: flex;
