@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<link rel="icon" href="img/ktc_nobg.png" type="image/png">
 	<link rel="stylesheet" href="style.css">
+	<script src="gallery.js"></script>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,11 +31,16 @@
 		</div>
 		<a class="link" href="#about"> About me </a>
 		<a class="link" href="#projects"> Projects </a>
-		<a class="link" href="#projects"> My artwork </a>
+		<a class="link" href="#artwork"> My artwork </a>
 	</header>
 
 	<main class="main">
-		<div class="info" style="background-image: url(img/header.png)">
+		<div id="gallery" onclick="close_gallery()">
+			<img id="gallery_img" src="" alt="gallery">
+		</div>
+
+		<div id="about"></div>
+		<section class="about" style="background-image: url(img/header.png)">
 			<img class="avatar" src="img/ktc.png" alt="avatar">
 			<div class="texts">
 				<div class="title"> Welcome to my website! </div>
@@ -48,14 +54,15 @@
 					i am member of <span><a href="" style="color: #7C63E6">Nycto Team</a></span> and <span><a href="https://bobophones.github.io/" style="color: #97ADB2">Bobophones</a></span>
 				</div>
 			</div>
-		</div>
+		</section>
 		<div>
+			<div id="projects"></div>
 			<div class="title"> Projects </div>
 			<div class="small_text">
 				here is projects that i create or participate in
 			</div>
 		</div>
-		<div class="projects" id="projects">
+		<section class="projects">
 			<div style="display:none"> ahahac 67 </div>
 			<div class="project">
 				<img class="icon" src="https://media.forgecdn.net/avatars/thumbnails/1150/378/256/256/638717862400643307.png" alt="icon">
@@ -65,11 +72,11 @@
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/legionary">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
@@ -83,11 +90,11 @@
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/overpacked">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
@@ -97,15 +104,15 @@
 				<img class="icon" src="https://media.forgecdn.net/avatars/thumbnails/1441/252/256/256/638934448135001820.png" alt="icon">
 				<div class="texts">
 					<div class="title"> BlockDonald's </div>
-					<div class="desc"> BlockDonald’s is an add-on for Farmer’s Delight that brings iconic fast food into Minecraft. With this expansion, players can cook and enjoy classic burgers, crispy fries in several variations, chicken nuggets, refreshing drinks, and even experiment with new ingredients like cheese, and mustard. A brand new deep fryer block makes it possible to prepare these meals just like in a real fast food kitchen, adding more fun and variety to your cooking adventures </div>
+					<div class="desc"> BlockDonald’s is an add-on for Farmer’s Delight that brings iconic fast food into Minecraft. With this expansion, players can cook and enjoy classic burgers, crispy fries in several variations, chicken nuggets, refreshing drinks, and even experiment with new ingredients... </div>
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/blockdonalds">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
@@ -119,11 +126,11 @@
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/falling-blocks-anim">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
@@ -137,11 +144,11 @@
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/bobo-lib">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
@@ -155,11 +162,11 @@
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/backpets">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
@@ -173,11 +180,11 @@
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/shershavy">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
@@ -191,11 +198,11 @@
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/crispy-fish">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
@@ -209,17 +216,33 @@
 					<div class="links">
 						<a class="link cf" href="https://www.curseforge.com/minecraft/mc-mods/the-stalwart">
 							<img class="icon" src="img/cf.svg" alt="icon">
-							<div> CurseForge </div>
+							<div class="text"> CurseForge </div>
 						</a>
 						<a class="link mr" href="">
 							<img class="icon" src="img/mr.svg" alt="icon">
-							<div> Modrinth </div>
+							<div class="text"> Modrinth </div>
 						</a>
 					</div>
 				</div>
 			</div>
 
+		</section>
+		<div>
+			<div id="artwork"></div>
+			<div class="title"> My artwork </div>
+			<div class="small_text">
+				here is my animations and textures
+			</div>
 		</div>
+		<section class="artworks">
+			<div class="title"> Animations </div>
+			<div class="list">
+				<div class="artwork" onclick="open_gallery(this)">
+					<img class="img" src="img/artwork/goofy_zombie.gif" alt="artwork">
+					<div class="title"> goofy zombie </div>
+				</div>
+			</div>
+		</section>
 	</main>
 
 	<footer class="footer">
