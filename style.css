@@ -1,8 +1,7 @@
 :root {
-	--main_c: #004D3E;
-	--main_hc: #00B693;
-	--link_c: #1C1E21;
-	--link_hc: #141619;
+	--main_c: #302928;
+	--main_hc: #8C8B83;
+	--bg_c: #141111;
 	--header_h: 50px;
 }
 
@@ -32,7 +31,7 @@ img {
 }
 
 .body {
-	background: black;
+	background: var(--bg_c);
 }
 
 .page {
@@ -132,7 +131,7 @@ img {
 		font-size: 25px;
 	}
 	.project .desc {
-		font-size: 15px;
+		font-size: 16px;
 	}
 	.project .links {
 		display: flex;
@@ -145,7 +144,7 @@ img {
 .link {
 	padding: 10px 15px;
 	border-radius: 15px;
-	background-color: var(--link_c);
+	background-color: var(--main_c);
 	display: flex;
 	align-items: center;
 	gap: 5px;
@@ -155,7 +154,7 @@ img {
 		height: 18px;
 	}
 	.link:hover {
-		background-color: var(--link_hc);
+		background-color: var(--bg_c);
 	}
 .link.cf {
 	background-color: #eb622b;
