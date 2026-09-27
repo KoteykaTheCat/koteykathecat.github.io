@@ -8,5 +8,9 @@ function close_gallery() {
 
 function get_img(container) {
 	if (!container || !(container instanceof HTMLElement)) return null;
-	return container.querySelector('.img').src;
+	return container.querySelector(".img").src;
 }
+
+document.addEventListener("keydown", function(event) {
+	if (event.code === "Escape") close_gallery();
+});
