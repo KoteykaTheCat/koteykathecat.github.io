@@ -4,6 +4,7 @@
 	--bg_c: #141111;
 	--tbg_c: rgba(0, 0, 0, 0.2);
 	--header_h: 50px;
+	--header_padding: 15px;
 }
 
 * {
@@ -49,12 +50,12 @@ img {
 
 .header {
 	position: fixed;
-	width: calc(100% - 60px);
+	width: calc(100% - (2 * var(--header_padding)));
 	height: var(--header_h);;
 	display: flex;
 	align-items: center;
 	gap: 30px;
-	padding: 15px 30px;
+	padding: var(--header_padding);
 	background: linear-gradient(135deg, var(--main_c), transparent);
 	box-shadow: rgb(0, 0, 0, 0.4) 0px 0px 25px;
 	z-index: 10;
@@ -74,7 +75,7 @@ img {
 		}
 
 .main {
-	margin-top: var(--header_h);
+	margin-top: calc(2 * var(--header_padding) + var(--header_h));
 	padding: 0 100px;
 }
 
@@ -101,7 +102,7 @@ img {
 }
 
 .about {
-	height: calc(100vh - var(--header_h));
+	height: calc(100vh - (2 * var(--header_padding) + var(--header_h)));
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -173,7 +174,10 @@ img {
 	background: var(--tbg_c);
 	padding: 20px;
 	border-radius: 20px;
-	max-width: calc(40% - 30px)
+	max-width: calc(40% - 30px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 	.artwork:hover {
 		background: rgba(0, 0, 0, 0.5);
@@ -250,7 +254,7 @@ img {
 
 .footer {
 	background: linear-gradient(45deg, transparent, var(--main_c));
-	padding: 30px;
+	padding: 10px;
 	display: flex;
 	justify-content: center;
 	box-shadow: rgb(0, 0, 0, 0.4) 0px 0px 25px;
@@ -264,5 +268,61 @@ img {
 
 
 @media (max-width: 720px) {
+	:root {
+		--header_h: 40px;
+	}
+
+	* {
+		font-size: 15px;
+	}
+
+	.header {
+		gap: 10px;
+		justify-content: space-evenly;
+	}
+
+	.main {
+		padding: 0 20px;
+	}
+
+	.title {
+		font-size: 30px;
+		line-height: 30px;
+	}
+
+	.about {
+		flex-direction: column;
+	}
+		.about .avatar {
+		    border-radius: 40px;
+			height: 250px;
+		}
+		.about .texts {
+			margin: 20px 0 0 0;
+		}
+
+	.small_text {
+		margin: 15px 0 0 0;
+		font-size: 18px;
+	}
+
+	.project {
+		max-width: 1000px;
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+		.project .links {
+			justify-content: center;
+		}
+
+	.artwork {
+		max-width: 1000px;
+		width: 100%;
+	}
+
+	.link {
+		padding: 8px 12px;
+	}
 
 }
