@@ -1,6 +1,5 @@
 const batch_size = 25;
 let dreams_i = [];
-let loaded_dreams = [];
 let loaded_count = 0;
 let loading = false;
 
@@ -24,14 +23,16 @@ async function init() {
 
 	load_dreams();
 
-	const params = new URLSearchParams(window.location.search);
-	if (params.has("id")) {
-		const id = params.get('id');
-		if (id) load_dream(id)
-		else not_found()
-	}
+	const id = new URLSearchParams(window.location.search).get("id");
+	if (id) show_dream(id);
 
 	window.addEventListener("scroll", on_scroll);
+
+	window.addEventListener("popstate", () => {
+		const id = new URLSearchParams(window.location.search).get("id");
+		if (id) show_dream(id);
+		else hide_dream();
+	});
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -49,38 +50,52 @@ function on_scroll() {
 }
 
 async function load_dreams() {
-	if (loading) return;
-	else loading = true;
-	if (loaded_count >= dreams_i.length) return;
+	if (loading || loaded_count >= dreams_i.length) return;
+	loading = true;
 
-	const next_batch = dreams_i.slice(loaded_count, loaded_count + batch_size);
-	let to_load = loaded_count + next_batch.length;
-	for (const i of next_batch) {
-		if (loaded_dreams.indexOf(i) !== -1) continue;
-		loaded_dreams.push(i);
-		const res = await fetch(`dreams/${i}.json`);
-		if (!res.ok) continue;
+	try {
+		const next_batch = dreams_i.slice(loaded_count, loaded_count + batch_size);
+		for (const i of next_batch) {
+			loaded_count += 1;
 
-		const dream = await res.json();
-		const card = document.createElement("div");
-		card.innerHTML = `
-			<div class="dream_p" id=${i} onclick="load_dream(this.id)">
-				<div class="title"> ${dream.title} </div>
-            		<div class="date"> ${dream.date} </div>
-            		<div class="tags">
-            			${"tags" in dream ? dream.tags.map(tag => `
-            				<div class="tag ${tag}"> ${tag_text[tag] || tag} </div>
-            			`).join("") : ""}
-            		</div>
-			</div>
-		`;
-		dreams_list.appendChild(card);
-		loaded_count += 1;
-		if (loaded_count >= to_load) loading = false;
+			const res = await fetch(`dreams/${i}.json`);
+			if (!res.ok) continue;
+
+			const dream = await res.json();
+			const card = document.createElement("div");
+			card.innerHTML = `
+				<div class="dream_p" id="${i}">
+					<div class="title">${dream.title}</div>
+					<div class="date">${dream.date}</div>
+					<div class="tags">${render_tags(dream)}</div>
+				</div>
+			`;
+			card.querySelector(".dream_p").addEventListener("click", () => open_dream(i));
+			dreams_list.appendChild(card);
+		}
+	} finally {
+		loading = false;
 	}
 }
 
-async function load_dream(id) {
+function render_tags(dream) {
+	if (!("tags" in dream)) return "";
+	return dream.tags.map(tag => `
+		<div class="tag ${tag}">${tag_text[tag] || tag}</div>
+	`).join("");
+}
+
+function open_dream(id) {
+	const current = new URLSearchParams(window.location.search).get("id");
+	if (current !== String(id)) {
+		const url = new URL(window.location.href);
+		url.searchParams.set("id", id);
+		history.pushState({ dream: id }, "", url);
+	}
+	show_dream(id);
+}
+
+async function show_dream(id) {
 	const res = await fetch(`dreams/${id}.json`);
 	if (!res.ok) {
 		not_found();
@@ -88,36 +103,40 @@ async function load_dream(id) {
 	}
 
 	const dream = await res.json();
-	dream_title.innerHTML = `${dream.title} </div>`;
-	dream_date.innerHTML = `${dream.date} </div>`;
-	dream_tags.innerHTML = `${"tags" in dream ? dream.tags.map(tag => `
-		<div class="tag ${tag}"> ${tag_text[tag] || tag} </div>
-	`).join("") : ""}`;
-	dream_text.innerHTML = `${dream.text} </div>`;
+	dream_title.innerHTML = dream.title;
+	dream_date.innerHTML = dream.date;
+	dream_tags.innerHTML = render_tags(dream);
+	dream_text.innerHTML = dream.text;
 	dream_date.classList.remove("hidden");
 	dream_tags.classList.remove("hidden");
 	dream_text.classList.remove("hidden");
 	dream_panel.classList.add("opened");
-	const url = new URL(window.location.href);
-    url.searchParams.set("id", id);
-    history.pushState(null, "", url);
 }
 
 function not_found() {
-	dream_title.innerHTML = `Сон не найден`;
+	dream_title.innerHTML = "Сон не найден";
 	dream_date.classList.add("hidden");
 	dream_tags.classList.add("hidden");
 	dream_text.classList.add("hidden");
 	dream_panel.classList.add("opened");
 }
 
-function close_dream() {
-	document.getElementById("dream").classList.remove("opened");
-	const url = new URL(window.location.href);
-	if (url.searchParams.has("id")) url.searchParams.delete("id");
-	history.replaceState(null, "", url);
-};
+function hide_dream() {
+	dream_panel.classList.remove("opened");
+}
 
-document.addEventListener("keydown", function(event) {
+function close_dream() {
+	if (!dream_panel.classList.contains("opened")) return;
+
+	if (history.state && history.state.dream !== undefined) history.back();
+	else {
+		const url = new URL(window.location.href);
+		url.searchParams.delete("id");
+		history.replaceState(null, "", url);
+		hide_dream();
+	}
+}
+
+document.addEventListener("keydown", function (event) {
 	if (event.code === "Escape") close_dream();
 });
