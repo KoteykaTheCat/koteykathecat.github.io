@@ -42,6 +42,15 @@ window.addEventListener("DOMContentLoaded", () => {
 	dream_date = document.getElementById("dream_date");
 	dream_tags = document.getElementById("dream_tags");
 	dream_text = document.getElementById("dream_text");
+
+	document.querySelector("#dream .dream_panel").addEventListener("click", event => {
+    	event.click_on_panel = true;
+    });
+    document.getElementById("dream").addEventListener("click", event => {
+    	if (event.click_on_panel) return;
+    	close_dream()
+    });
+
 	init();
 });
 
